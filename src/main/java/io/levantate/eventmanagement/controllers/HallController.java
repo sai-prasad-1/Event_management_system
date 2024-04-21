@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import io.levantate.eventmanagement.models.Hall;
 import io.levantate.eventmanagement.services.HallService;
 
 import java.util.List;
-
+@RestController
 public class HallController {
     @Autowired
     HallService hallService=new HallService();

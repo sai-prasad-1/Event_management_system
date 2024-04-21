@@ -39,10 +39,7 @@ public class Hall {
     @Column(nullable = false)
     private List<String> photos;
 
-    public Object getCapacity() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getCapacity'");
-    }
+
 
 
 
