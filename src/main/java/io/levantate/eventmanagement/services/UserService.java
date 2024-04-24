@@ -24,12 +24,12 @@ public class UserService {
 
 
 
-    public boolean login(String username, String password) {
+    public User login(String username, String password) {
         User user = userRepository.findByUsername(username);
         if (user != null && user.getPassword().equals(password)) {
-            return true; // Login successful
+            return user; // Login successful
         }
-        return false; // Login failed
+        return user; // Login failed
     }
 
     public List<User> getAllUsers(){

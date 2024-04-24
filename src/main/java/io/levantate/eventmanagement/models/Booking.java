@@ -35,4 +35,10 @@ public class Booking {
     @Column(nullable = false)
     private Date timestamp;
 
+    @Column(nullable = false)
+    private Long phone;
+
+    @Column(nullable = false)
+    private String address;
+
 }
