@@ -26,11 +26,17 @@ public class UserService {
 
     public User login(String username, String password) {
         User user = userRepository.findByUsername(username);
-        if (user != null && user.getPassword().equals(password)) {
-            return user; // Login successful
+        if (user != null) {
+            if (user.getPassword().equals(password)) {
+                return user; // Login successful
+            } else {
+                throw new IllegalArgumentException("Invalid password");
+            }
+        } else {
+            throw new IllegalArgumentException("Invalid username");
         }
-        return user; // Login failed
     }
+    
 
     public List<User> getAllUsers(){
         return userRepository.findAll();

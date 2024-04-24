@@ -26,14 +26,17 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Object> submitLoginForm(@RequestBody User user) {
-        try {
-            boolean registeredUser = userService.login(user.getUsername(),user.getPassword());
-            return ResponseEntity.ok(registeredUser);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to Login user: " + e.getMessage());
-        }
+public ResponseEntity<Object> submitLoginForm(@RequestBody User user) {
+    try {
+        User loggedInUser = userService.login(user.getUsername(), user.getPassword());
+        return ResponseEntity.ok(loggedInUser);
+    } catch (IllegalArgumentException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to login user: " + e.getMessage());
     }
+}
+
 
     @GetMapping("/users")
     public ResponseEntity<Object> getAllUsers(){
