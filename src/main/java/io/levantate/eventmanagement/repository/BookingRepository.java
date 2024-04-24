@@ -8,6 +8,5 @@ import io.levantate.eventmanagement.models.Booking;
 
 @Repository 
 public interface BookingRepository extends JpaRepository<Booking, Long> {
-    
-    
+   
 }

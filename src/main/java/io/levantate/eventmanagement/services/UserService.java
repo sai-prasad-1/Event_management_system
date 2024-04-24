@@ -2,6 +2,9 @@ package io.levantate.eventmanagement.services;
 
 import io.levantate.eventmanagement.models.User;
 import io.levantate.eventmanagement.repository.UserRepository;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,11 +22,21 @@ public class UserService {
         return userRepository.findByUsername(username); 
     }
 
+
+
     public boolean login(String username, String password) {
         User user = userRepository.findByUsername(username);
         if (user != null && user.getPassword().equals(password)) {
             return true; // Login successful
         }
         return false; // Login failed
+    }
+
+    public List<User> getAllUsers(){
+        return userRepository.findAll();
+    }
+
+    public boolean userExistsByUserId(Long userId) {
+        return userRepository.findById(userId).isPresent();
     }
 }

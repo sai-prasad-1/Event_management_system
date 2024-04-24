@@ -34,4 +34,8 @@ public class HallService {
         Optional<Hall> optionalHall = hallRepository.findById(id);
         return optionalHall.orElse(null);
     }
+
+    public boolean hallexistsByHallId(Long hallId) {
+        return hallRepository.findById(hallId).isPresent();
+    }
 }

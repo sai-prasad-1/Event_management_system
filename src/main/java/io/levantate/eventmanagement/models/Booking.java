@@ -1,5 +1,7 @@
 package io.levantate.eventmanagement.models;
 
+import java.sql.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,16 +20,19 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String hall;
+    @Column(nullable = false)
+    private Long hallId;
 
     @Column(nullable = false)
     private int time;
 
     @Column(nullable = false)
-    private String user;
+    private Long userId;
 
     @Column(nullable = false)
     private String theme;
+
+    @Column(nullable = false)
+    private Date timestamp;
 
 }

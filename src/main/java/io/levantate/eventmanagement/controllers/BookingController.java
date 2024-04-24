@@ -14,22 +14,39 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.levantate.eventmanagement.models.Booking;
 import io.levantate.eventmanagement.services.BookingService;
+import io.levantate.eventmanagement.services.HallService;
+import io.levantate.eventmanagement.services.UserService;
 @RestController
 public class BookingController {
     @Autowired
     BookingService bookingService=new BookingService();
 
-    @PostMapping("/booking") // add hall
+    @Autowired
+    UserService userService = new UserService();
+
+    @Autowired
+    HallService hallService = new HallService();
+
+    @PostMapping("/booking")
     public ResponseEntity<Object> registerBooking(@RequestBody Booking booking) {
+        // Check if the user exists in the user service
+        if (!userService.userExistsByUserId(booking.getUserId())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User does not exist");
+        }
+        if (!hallService.hallexistsByHallId(booking.getHallId())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Hall does not exist");
+        }
+
         try {
-            Booking registeredbooking = bookingService.registerBooking(booking);
-            return ResponseEntity.ok(registeredbooking);
+        
+            Booking registeredBooking = bookingService.registerBooking(booking);
+             return ResponseEntity.status(HttpStatus.OK).body(registeredBooking);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to register booking: " + e.getMessage());
         }
     }
 
-    @DeleteMapping("/booking/{id}") // dwlete a certain hal;l
+    @DeleteMapping("/booking/{id}") // delete a certain hall
     public ResponseEntity<Object> deletebooking(@PathVariable Long id) {
         try {
             bookingService.deleteBooking(id);

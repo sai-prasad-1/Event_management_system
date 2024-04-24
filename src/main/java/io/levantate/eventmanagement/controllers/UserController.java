@@ -1,4 +1,6 @@
 package io.levantate.eventmanagement.controllers;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +30,16 @@ public class UserController {
         try {
             boolean registeredUser = userService.login(user.getUsername(),user.getPassword());
             return ResponseEntity.ok(registeredUser);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to Login user: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/users")
+    public ResponseEntity<Object> getAllUsers(){
+        try{
+            List<User> users = userService.getAllUsers();
+            return ResponseEntity.ok(users);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to Login user: " + e.getMessage());
         }
