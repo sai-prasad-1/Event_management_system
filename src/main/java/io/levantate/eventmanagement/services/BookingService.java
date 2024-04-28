@@ -8,19 +8,13 @@ import org.springframework.stereotype.Service;
 
 import io.levantate.eventmanagement.models.Booking;
 import io.levantate.eventmanagement.repository.BookingRepository;
-import io.levantate.eventmanagement.repository.HallRepository;
-import io.levantate.eventmanagement.repository.UserRepository;
+
 
 @Service
 public class BookingService {
     @Autowired
     private BookingRepository bookingRepository;
 
-    @Autowired
-    private HallRepository hallRepository;
-
-    @Autowired
-    private UserRepository userRepository;
 
     
 

@@ -10,6 +10,9 @@ services:
       POSTGRES_DB: testdb
       POSTGRES_USER: your_postgres_username
       POSTGRES_PASSWORD: your_postgres_password
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin
@@ -20,3 +23,6 @@ services:
       PGADMIN_DEFAULT_PASSWORD: 12345678
     depends_on:
       - postgres
+
+volumes:
+  pgdata:
